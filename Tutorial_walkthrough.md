@@ -21,7 +21,17 @@ conda install -c bioconda trimmomatic
 
 2. Now let's run trimmomatic: 
 ```sh
-trimmomatic PE -threads 4 -phred33 1mAM1.fastq 1mAM2.fastq AM1P.fastq AM1U.fastq AM2P.fastq AM2U.fastq ILLUMINACLIP:adapters.fasta:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:150
+trimmomatic PE\     # Run trimmomatic in paired end mode
+ -threads 4\        # Run with 4 threads
+ -phred33\          # Quality scores encoded with PHRED33 
+ 1mAM1.fastq\       # Input file (forward)
+ 1mAM2.fastq\       # Input file (reverse)
+ AM1P.fastq AM1U.fastq AM2P.fastq AM2U.fastq\ # output files
+ ILLUMINACLIP:adapters.fasta:2:30:10\ # Path to adaptor seqs 
+ LEADING:3\ # remove leading bases with qual below 3
+ TRAILING:3\ # remove trailing bases with qual below 3 
+ SLIDINGWINDOW:4:15\    # Sliding window length of 4 bp with qual threshold of 15 (below 15 = removed) 
+ MINLEN:150     # Minimum read length 
 ```
 ## Assembly 
 1. Now that we've removed our adaptors and poor quality base calls, let's go ahead and assemble our genome. First, begin by creating a new conda environment and install the genome assembly software "SPAdes" just as you did for Trimmomatic. Then, we'll run SPAdes with default paramers: 
@@ -39,9 +49,7 @@ spades.py -1 AM1P.fastq -2 AM2P.fastq -o ./assembly --cov-cutoff auto
 2. The assembly process may take a while to finish running. Accordingly, we'll carry out the rest of our tutorial on a genome which has already been assembled ahead of time. Just as we performed QC on our raw reads, we will also want to do so on our assembled genome. Download the seqkit package in the same manner you downloaded SPAdes and Trimmomatic. Enter the command `seqkit` to bring up the help menue, and use the information provided there to determine how to run the `stats` functionality. 
 
 <details>
-<p style="margin-left: 25px;">
-<summary><p style="margin-left;">Hint</p>
-</summary>
+<summary>Hint</summary>
 
 
 ```sh
@@ -49,3 +57,8 @@ seqkit stats NesPan3.fasta
 ```
 
 </details>
+
+3. Normally, we'd want to use BUSCO to get a rough idea of how complete our genome is. BUSCO (which stands for "Benchmarking Universal Single Copy Orthologs") uses highly conserved single copy orthologs which are expected to be present in every member of a given group. BUSCO is a complicated program with many depencies. Accordingly, it make sense to run BUSCO using Docker: 
+```sh
+
+```
