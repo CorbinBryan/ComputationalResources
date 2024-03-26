@@ -1,5 +1,32 @@
 ## Downloading Files for Analysis 
+* For this tutorial, you will assemble and analyze a genome produced with Illumina 150 bp paired-end sequencing from a preserved specimen of *Amanita muscaria*, a mushroom-forming basidiomycete fungus (Amanitaceae, Agaricales). 
+* Please do not share the provided tutorial genome. 
+* Access to the raw sequence files are available via a Google-Drive link which I will provide either during a tutorial workshop or by request. 
+* When you have been granted access and have downloaded the tutorial dataset, clone this repository onto your Desktop:
+```sh
+git clone https://www.github.com/CorbinBryan/ComputationalResources.git 
+```
+* Use the `mv` command to move your compressed tar-ball (containing the raw sequencing reads) into this directory. 
+```sh
+# mv moves a file from a source to a destination
+# syntax: mv /path/to/source/file.txt /path/to/destination
+# if a file is specified as destination rather than a directory
+#       the command can be used to rename files 
+mv /path/to/tarball/AM.tar.gz /path/to/ComputationalResources
+```
+* Decompress the provided tar-ball: 
+```sh
+tar -xzvf AM.tar.gz 
+```
+* Navigate into the resulting subdirectory using the `cd` command. In Unix like languages, `./` tells the interpreter that a provided directory is a subdirectory of the current working directory. To view the location of the current working directory, you can use the command `pwd`, which outputs the path to the working directory to standard out. To navigate to the parent directory of a given directory (i.e., the folder that holds a folder), you can use `../`. While in that directory, examine the structure of your raw sequencing files before returning to the parent directory.
+```sh
+cd ./1AM 
+# the head command will view the first few lines of a given text file 
+head 1mAM1.fastq 
 
+cd .. 
+```
+* How does this FASTQ file compare to a typical FASTA file? What information is lacking in a FASTA file but provided in a FASTQ file? 
 ## Quality Control 
 Your first step in assembling a genome is to remove poor quality base calls and adaptor sequences from your raw DNA reads. To do so, we'll use a program called Trimmomatic, which can be easily installed using Conda. 
 
@@ -91,4 +118,15 @@ The percentage of complete benchmarking orthologs is often used as a measure of 
 
 </details>
 
+## Annotation 
+<details>
+<summary><b>What does it mean to "annotate" a genome?</b></summary>
 
+The assembly process is entirely agnostic to the presence and identity of genes. The process by which genes are located and identified in a genome is called **annotation**. **Gene prediction** is the first step of genomic annotation, and involves inferring the stop sites, start sites, and splice sites of every gene in a given genome, which are then converted into a set of predicted gene sequences. **Functional annotation** is the process by which predicted genes are putatively assigned to functional categories. Many complex algorithms and methodologies are involved in functional annotation! Clustering algorithms (often using reciprocal best-hit BLAST) are used in many programs, as is sequence homology. Other programs use deep-learning algorithms to predict gene function. 
+
+For new bioinformaticians, I recommend using a prepackaged functional annotation suite such as EggNOG. 
+
+</details>
+
+1. Using what you have learned so far, download the program AUGUSTUS using conda. Consult the online manual for AUGUSTUS to determine how to do so. Understanding computational literature is a key part of bioinformatics. If bioinformatics is to play a large part in your future career, you would be best served to get good at reading manuals fast... 
+2. Use the EggNOG webserver to provide functional annotations for your gene predictions. Download your results and examine them using Excel. 
