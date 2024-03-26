@@ -87,8 +87,8 @@ seqkit stats NesPan3.fasta
 <details>
 <summary><b>Interpretting BUSCO Results</b></summary>
 
-The percentage of complete benchmarking orthologs is often used as a measure of genome completeness when no other information (i.e., a reference genome) is available. However, just because a BUSCO is missing from a genome does not mean that a genome is poor quality. In some (relatively uncommon) circumstances, the gene may be missing as a result of some evolutionary phenomenon. Selecting an appropriate database can reduce the likelihood of this, but may not eliminate the possibility entirely. 
+The percentage of complete benchmarking orthologs is often used as a measure of genome completeness when no other information (i.e., a reference genome) is available. However, just because a BUSCO is missing from a genome does not mean that a genome is poor quality. In some circumstances, the gene may be missing as a result of some evolutionary phenomenon. Like many things in biology and statistics, there is no definite BUSCO threshold for determining whether or not a genome is appropriate for a given downstream application. Although the *Pinus taeda* genome is 22 Gb (a typical fungal genome may be around 25 Mb, for comparison), it only has 44% of the BUSCO genes it should. Should this genome be considered useless? **Absolutely not**! Ideally, a genome's BUSCO completeness should be considered along the distribution of read-length statistics, the type of sequencing performed, the distribution of GC-rich sites, and trends in the aforementioned factors in closely related taxa. 
 
 </details>
 
-## Downstream Applications 
+
