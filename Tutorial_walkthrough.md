@@ -58,7 +58,37 @@ seqkit stats NesPan3.fasta
 
 </details>
 
-3. Normally, we'd want to use BUSCO to get a rough idea of how complete our genome is. BUSCO (which stands for "Benchmarking Universal Single Copy Orthologs") uses highly conserved single copy orthologs which are expected to be present in every member of a given group. BUSCO is a complicated program with many depencies. Accordingly, it make sense to run BUSCO using Docker: 
-```sh
+3. Normally, we'd want to use BUSCO to get a rough idea of how complete our genome is. BUSCO (which stands for "Benchmarking Universal Single Copy Orthologs") uses highly conserved single copy orthologs which are expected to be present in every member of a given group. BUSCO is a complicated program with many depencies. Accordingly, it make sense to run BUSCO using Docker. I also frequently encounter problems running BUSCO using Conda. 
+    * First, run the following code chunk to write and examine a script called `busco_script.sh`. Don't forget to substitute `[GENOME_NAME]` with the path to your assembled genome
+    ```sh
+    # echo will text. Using the pipe '>' lets you save the output
+    echo 'busco -i [GENOME_NAME] -m genome -l agaricales_odb10 --augustus --augustus_species laccaria_bicolor ' > buscos.sh
+    # make script executable
+    chmod u+x buscos.sh 
+    # make a new subdirectory in the current directory
+    mkdir docker_busco
+    # copy genome into subdirectory; syntax is cp [source] [dest]
+    cp [GENOME_NAME] ./docker_busco
+    # copy script into subdirectory
+    cp buscos.sh ./docker_busco
+    ```
+    * We'll then use the BUSCO docker image to run this program: 
+    ```sh
+    # pull docker image from docker hub 
+    docker pull ezlabgva/busco:v5.7.0_cv1
+    # run the container created from the image
+    docker run -u $(id -u) -it -rm -v ./docker_busco:/busco_wd ezlabgva/busco:v5.7.0_cv1
+    # -u specifies your user ID 
+    # -it tells the program to run interactively rather than in background 
+    # -rm tells the container to stop and shut down upon its completion
+    # -v specifies location of a volume (subdirectory which is shared with docker container)
+    ```
+    * Once your container has been spun-up, simply run BUSCO by running your script: `./buscos.sh`
+<details>
+<summary><b>Interpretting BUSCO Results</b></summary>
 
-```
+The percentage of complete benchmarking orthologs is often used as a measure of genome completeness when no other information (i.e., a reference genome) is available. However, just because a BUSCO is missing from a genome does not mean that a genome is poor quality. In some (relatively uncommon) circumstances, the gene may be missing as a result of some evolutionary phenomenon. Selecting an appropriate database can reduce the likelihood of this, but may not eliminate the possibility entirely. 
+
+</details>
+
+## Downstream Applications 
