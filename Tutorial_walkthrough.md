@@ -130,3 +130,25 @@ For new bioinformaticians, I recommend using a prepackaged functional annotation
 
 1. Using what you have learned so far, download the program AUGUSTUS using conda. Consult the online manual for AUGUSTUS to determine how to do so. Understanding computational literature is a key part of bioinformatics. If bioinformatics is to play a large part in your future career, you would be best served to get good at reading manuals fast... 
 2. Use the EggNOG webserver to provide functional annotations for your gene predictions. Download your results and examine them using Excel. 
+
+## BLASTn
+1. Many of you are familiar with BLASTn on NCBI's webservers. BLASTn, BLASTp, tBLASTn, and BLASTx are also available as part of a command-line software package maintained by NCBI. These command line packages allow you to BLAST query sequences against custom databases. Here, our database will be a genome of interest from which we want to extract some gene, which will be our query sequence. Install NCBI's BLAST+ suite in the same manner as above using conda. 
+
+<details>
+<Summary>Code</summary>
+
+```sh
+conda create -n ncbi-blast bioconda::blast
+```
+</details>
+
+2. Create a custom BLAST database using `makeblastdb`. If you're unsure how to use this command, try `makeblastdb -h` to bring up the help page. 
+
+<details>
+<Summary>Code</summary>
+
+```sh
+makeblastdb -in [GENOME_NAME].fastq -dbtype nucl -out AmanitaDB
+```
+
+</details>
