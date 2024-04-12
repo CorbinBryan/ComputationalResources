@@ -1,7 +1,7 @@
 ## Downloading Files for Analysis 
 * For this tutorial, you will assemble and analyze a genome produced with Illumina 150 bp paired-end sequencing from a preserved specimen of *Amanita muscaria*, a mushroom-forming basidiomycete fungus (Amanitaceae, Agaricales). 
 * Please do not share the provided tutorial genome. 
-* Access to the raw sequence files are available via a Google-Drive link which I will provide either during a tutorial workshop or by request. 
+* Access to the raw sequence files are available via a Google-Drive link which I will provide either during a tutorial workshop o by request. 
 * When you have been granted access and have downloaded the tutorial dataset, clone this repository onto your Desktop:
 ```sh
 git clone https://www.github.com/CorbinBryan/ComputationalResources.git 
