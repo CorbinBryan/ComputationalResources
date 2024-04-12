@@ -164,6 +164,4 @@ blastn -db AmanitaDB -out blast_out.tsv -query amDODA.fa -outfmt 6
 
 </details>
 
-4. Use what you have learned so far and the resources available to you to determine how you might parse your BLAST output to convert your results to a useable fasta file. 
-5. Now that you've learned how to use BLAST, repeat this process using `query_ITS.fa`. 
-
+4. Use what you have learned so far and the resources available to you to determine how you might parse your BLAST output to convert your results to a useable fasta file.  
