@@ -154,3 +154,14 @@ makeblastdb -in [GENOME_NAME].fastq -dbtype nucl -out AmanitaDB
 </details>
 
 3. Examine the file `amDODA.fa`. This file contains the DNA sequence for the L-DOPA dioxygenase of *Amanita muscaria*. The deoxygenation of L-DOPA results results in a molecule with reactive aldehyde moieties, allowing for intramolecular reactions that result in the formation of pigment compounds. Use. BLASTn to extract this gene from the provided genome. 
+
+<details>
+<summary>Code</summary>
+
+```sh
+blastn -db AmanitaDB -out blast_out.tsv -query amDODA.fa -outfmt 6
+```
+
+</details>
+
+4. Use what you have learned so far and the resources available to you to determine how you might parse your BLAST output to convert your results to a useable fasta file. 
